@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
-import Header from "./components/header";
-import Footer from "./components/footer";
-import SignIn from "./components/signIn";
+import Header from "../components/header";
+import Footer from "../components/footer";
+import SignInForm from "../components/signInForm";
 
 export const metadata: Metadata = {
-  title: "Log in with your Care Identity account - Authentication",
+  title: "Sign in - Authentication",
 };
 
-export default function Home() {
+export default function Page() {
   const serviceName = "Screening";
-
   return (
     <>
       <Header serviceName={serviceName} />
@@ -17,7 +16,7 @@ export default function Home() {
         <main className="nhsuk-main-wrapper" id="maincontent" role="main">
           <div className="nhsuk-grid-row">
             <div className="nhsuk-grid-column-two-thirds">
-              <SignIn serviceName={serviceName} />
+              <SignInForm></SignInForm>
             </div>
           </div>
         </main>
