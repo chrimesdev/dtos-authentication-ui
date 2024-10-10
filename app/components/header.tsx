@@ -1,10 +1,16 @@
 import Link from "next/link";
+import { auth } from "@/app/lib/auth";
+import SignOut from "./signOut";
 
 interface HeaderProps {
   serviceName?: string;
 }
 
-const Header: React.FC<HeaderProps> = ({ serviceName = "Authentication" }) => {
+export default async function Header({
+  serviceName = "Screening",
+}: HeaderProps) {
+  const session = await auth();
+
   return (
     <>
       <header className="nhsuk-header" role="banner">
@@ -41,9 +47,27 @@ const Header: React.FC<HeaderProps> = ({ serviceName = "Authentication" }) => {
             </Link>
           </div>
         </div>
+        {session && (
+          <div className="nhsuk-navigation-container">
+            <nav
+              className="nhsuk-navigation"
+              id="header-navigation"
+              role="navigation"
+              aria-label="Primary navigation"
+            >
+              <ul className="nhsuk-header__navigation-list">
+                <li
+                  className="nhsuk-header__navigation-item"
+                  aria-hidden="true"
+                ></li>
+                <li className="nhsuk-header__navigation-item">
+                  <SignOut className="nhsuk-header__navigation-link" />
+                </li>
+              </ul>
+            </nav>
+          </div>
+        )}
       </header>
     </>
   );
-};
-
-export default Header;
+}

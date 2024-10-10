@@ -25,8 +25,22 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 Create a `.env` file which should override environment variables required to run locally:
 
 ```
-To be completed
+# Default
+BASE_URL=http://localhost:3000
+NODE_ENV=development
+
+# Next Auth
+NEXTAUTH_URL=http://localhost:3000/api/auth
+NEXTAUTH_SECRET={RANDOM_SECRET_STRING}
+
+# CIS2 Auth
+AUTH_CIS2_ISSUER=https://am.nhsint.auth-ptl.cis2.spineservices.nhs.uk/openam/oauth2/realms/root/realms/NHSIdentity/realms/Healthcare
+AUTH_CIS2_CLIENT_ID={CLIENT_ID}
+AUTH_CIS2_CLIENT_SECRET={CLIENT_SECRET}
+ENABLE_CIS2_AAL2=true
 ```
+
+For `NEXTAUTH_SECRET` you can use `openssl rand -base64 32` or [https://generate-secret.vercel.app/32](https://generate-secret.vercel.app/32) to generate a random value.
 
 ## Testing
 
