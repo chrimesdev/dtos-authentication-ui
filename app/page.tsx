@@ -6,9 +6,19 @@ import SignIn from "./components/signIn";
 import SignInDevelopment from "./components/signInDevelopment";
 import { auth } from "./lib/auth";
 
-export const metadata: Metadata = {
-  title: "Log in with your Care Identity account | Screening - NHS England",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const session = await auth();
+
+  if (session) {
+    return {
+      title: "Overview - NHS England",
+    };
+  }
+
+  return {
+    title: "Log in with your Care Identity account - NHS England",
+  };
+}
 
 export default async function Home() {
   const serviceName = "Screening";

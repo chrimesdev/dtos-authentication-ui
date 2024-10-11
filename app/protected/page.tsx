@@ -5,7 +5,7 @@ import Footer from "@/app/components/footer";
 import { auth } from "@/app/lib/auth";
 
 export const metadata: Metadata = {
-  title: "Protected page | Screening - NHS England",
+  title: "Protected page - NHS England",
 };
 
 export default async function Page() {

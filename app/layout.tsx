@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.scss";
 
 export const metadata: Metadata = {
-  title: "Screening - NHS England",
+  title: "NHS England",
 };
 
 export default function RootLayout({
