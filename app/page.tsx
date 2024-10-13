@@ -31,7 +31,7 @@ export default async function Home() {
         <main className="nhsuk-main-wrapper" id="maincontent" role="main">
           <div className="nhsuk-grid-row">
             <div className="nhsuk-grid-column-two-thirds">
-              {session ? (
+              {session?.user ? (
                 <>
                   <h1>Overview</h1>
                   <p>
