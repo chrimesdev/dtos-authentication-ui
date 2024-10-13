@@ -9,7 +9,7 @@ import { auth } from "./lib/auth";
 export async function generateMetadata(): Promise<Metadata> {
   const session = await auth();
 
-  if (session) {
+  if (session?.user) {
     return {
       title: "Overview - NHS England",
     };
