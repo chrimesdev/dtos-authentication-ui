@@ -3,7 +3,6 @@ import Link from "next/link";
 import Header from "./components/header";
 import Footer from "./components/footer";
 import SignIn from "./components/signIn";
-import SignInDevelopment from "./components/signInDevelopment";
 import { auth } from "./lib/auth";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -43,9 +42,6 @@ export default async function Home() {
               ) : (
                 <>
                   <SignIn serviceName={serviceName} />
-                  {process.env.NODE_ENV === "development" && (
-                    <SignInDevelopment />
-                  )}
                 </>
               )}
             </div>
