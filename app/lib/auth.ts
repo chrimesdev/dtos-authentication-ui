@@ -1,4 +1,4 @@
-import NextAuth, { Profile, Session, User } from "next-auth";
+import NextAuth, { Profile, Session } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import { OAuthConfig } from "next-auth/providers";
 
@@ -23,13 +23,12 @@ const NHS_CIS2: OAuthConfig<Profile> = {
   idToken: false,
 };
 
-interface CustomUser extends User {
-  given_name?: string;
-  family_name?: string;
-}
-
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [NHS_CIS2],
+  session: {
+    strategy: "jwt",
+    maxAge: 15 * 60, // 15 minutes
+  },
   callbacks: {
     authorized: async ({ auth }) => {
       // Logged in users are authenticated, otherwise redirect to login page
@@ -37,17 +36,26 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     },
     async jwt({ token, profile }) {
       if (profile) {
-        token.profile = profile;
+        token.name = `${profile.given_name} ${profile.family_name}`;
       }
       return token;
     },
     async session({ session, token }: { session: Session; token: JWT }) {
-      session.user = token.profile as CustomUser;
+      if (session.user) {
+        session.user.name = token.name;
+      }
       return session;
     },
   },
   pages: {
     signIn: "/",
     error: "/error",
+  },
+  events: {
+    async session({ session }) {
+      const maxAge = 15 * 60; // 15 minutes
+      const now = Math.floor(Date.now() / 1000);
+      session.expires = new Date((now + maxAge) * 1000).toISOString();
+    },
   },
 });
