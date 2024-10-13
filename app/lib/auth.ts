@@ -14,9 +14,14 @@ const NHS_CIS2: OAuthConfig<any> = {
     authorization: {
       params: {
         acr_values: "AAL2_OR_AAL3_ANY",
+        scope: "openid profile email",
       },
     },
   }),
+  userinfo: `https://am.nhsint.auth-ptl.cis2.spineservices.nhs.uk:443/openam/oauth2/realms/root/realms/NHSIdentity/realms/Healthcare/userinfo`,
+  token: {
+    url: `https://am.nhsint.auth-ptl.cis2.spineservices.nhs.uk:443/openam/oauth2/realms/root/realms/NHSIdentity/realms/Healthcare/access_token`,
+  },
 };
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
