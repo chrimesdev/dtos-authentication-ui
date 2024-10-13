@@ -1,24 +1,23 @@
 import type { Metadata } from "next";
-import Header from "./components/header";
-import Footer from "./components/footer";
-import Link from "next/link";
+import AuthError from "@/app/components/authError";
+import Header from "@/app/components/header";
+import Footer from "@/app/components/footer";
 
 export const metadata: Metadata = {
-  title: "We cannot find the page you’re looking for - NHS England",
+  title: "Something went wrong - NHS England",
 };
 
-export default function Home() {
+export default function AuthErrorPage() {
+  const serviceName = "Screening";
+
   return (
     <>
-      <Header />
+      <Header serviceName={serviceName} />
       <div className="nhsuk-width-container">
         <main className="nhsuk-main-wrapper" id="maincontent" role="main">
           <div className="nhsuk-grid-row">
             <div className="nhsuk-grid-column-two-thirds">
-              <h1>We cannot find the page you’re looking for</h1>
-              <p>
-                <Link href="/">Return to the homepage</Link>
-              </p>
+              <AuthError />
             </div>
           </div>
         </main>
