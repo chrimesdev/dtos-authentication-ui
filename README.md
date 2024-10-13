@@ -2,7 +2,7 @@
 
 User interface for the Authentication service for Screening.
 
-Built with [Next.js](https://nextjs.org/).
+Built with [Next.js](https://nextjs.org/) and [NHS Care Identity Service (CIS2)](https://digital.nhs.uk/services/care-identity-service).
 
 ## Setup
 
@@ -22,7 +22,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ### Environment variables
 
-Create a `.env` file which should override environment variables required to run locally:
+Create a `.env` file to set environment variables required to run locally:
 
 ```
 # Default
@@ -34,10 +34,9 @@ NEXTAUTH_URL=http://localhost:3000/api/auth
 NEXTAUTH_SECRET={RANDOM_SECRET_STRING}
 
 # CIS2 Auth
-AUTH_CIS2_ISSUER=https://am.nhsint.auth-ptl.cis2.spineservices.nhs.uk/openam/oauth2/realms/root/realms/NHSIdentity/realms/Healthcare
+AUTH_CIS2_ISSUER=https://am.nhsint.auth-ptl.cis2.spineservices.nhs.uk
 AUTH_CIS2_CLIENT_ID={CLIENT_ID}
 AUTH_CIS2_CLIENT_SECRET={CLIENT_SECRET}
-ENABLE_CIS2_AAL2=true
 ```
 
 For `NEXTAUTH_SECRET` you can use `openssl rand -base64 32` or [https://generate-secret.vercel.app/32](https://generate-secret.vercel.app/32) to generate a random value.

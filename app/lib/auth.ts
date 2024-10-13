@@ -7,20 +7,19 @@ const NHS_CIS2: OAuthConfig<any> = {
   id: "nhs-cis2",
   name: "NHS CIS2 Authentication",
   type: "oidc",
-  issuer: process.env.AUTH_CIS2_ISSUER,
+  issuer: `${process.env.AUTH_CIS2_ISSUER_URL}/openam/oauth2/realms/root/realms/NHSIdentity/realms/Healthcare`,
   clientId: process.env.AUTH_CIS2_CLIENT_ID,
   clientSecret: process.env.AUTH_CIS2_CLIENT_SECRET,
-  ...(process.env.ENABLE_CIS2_AAL2 === "true" && {
-    authorization: {
-      params: {
-        acr_values: "AAL2_OR_AAL3_ANY",
-        scope: "openid profile email",
-      },
+  authorization: {
+    params: {
+      acr_values: "AAL2_OR_AAL3_ANY",
+      scope: "openid profile email",
+      response_type: "code",
     },
-  }),
-  userinfo: `https://am.nhsint.auth-ptl.cis2.spineservices.nhs.uk:443/openam/oauth2/realms/root/realms/NHSIdentity/realms/Healthcare/userinfo`,
+  },
+  userinfo: `${process.env.AUTH_CIS2_ISSUER_URL}/openam/oauth2/realms/root/realms/NHSIdentity/realms/Healthcare/userinfo`,
   token: {
-    url: `https://am.nhsint.auth-ptl.cis2.spineservices.nhs.uk:443/openam/oauth2/realms/root/realms/NHSIdentity/realms/Healthcare/access_token`,
+    url: `${process.env.AUTH_CIS2_ISSUER_URL}/openam/oauth2/realms/root/realms/NHSIdentity/realms/Healthcare/access_token`,
   },
 };
 
