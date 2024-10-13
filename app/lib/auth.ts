@@ -1,4 +1,5 @@
-import NextAuth, { Profile } from "next-auth";
+import NextAuth, { Profile, Session, User } from "next-auth";
+import { JWT } from "next-auth/jwt";
 import { OAuthConfig } from "next-auth/providers";
 
 const NHS_CIS2: OAuthConfig<Profile> = {
@@ -22,12 +23,27 @@ const NHS_CIS2: OAuthConfig<Profile> = {
   idToken: false,
 };
 
+interface CustomUser extends User {
+  given_name?: string;
+  family_name?: string;
+}
+
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [NHS_CIS2],
   callbacks: {
     authorized: async ({ auth }) => {
       // Logged in users are authenticated, otherwise redirect to login page
       return !!auth;
+    },
+    async jwt({ token, profile }) {
+      if (profile) {
+        token.profile = profile;
+      }
+      return token;
+    },
+    async session({ session, token }: { session: Session; token: JWT }) {
+      session.user = token.profile as CustomUser;
+      return session;
     },
   },
   pages: {

@@ -22,8 +22,8 @@ export default async function Page() {
               <h1>Protected page</h1>
               <p>Example of an authentication protected page.</p>
               <p>
-                You are logged in as {session?.user?.name}, so you can view this
-                page.
+                You are logged in as {session?.user?.given_name}{" "}
+                {session?.user?.family_name}, so you can view this page.
               </p>
               <p>
                 <Link href="/">Go back to the Overview page</Link>
