@@ -21,6 +21,7 @@ const NHS_CIS2: OAuthConfig<Profile> = {
     token_endpoint_auth_method: "client_secret_post",
   },
   idToken: false,
+  checks: ["state"],
 };
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
