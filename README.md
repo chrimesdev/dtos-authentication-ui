@@ -8,10 +8,10 @@ Built with [Next.js](https://nextjs.org/) and [NHS Care Identity Service (CIS2)]
 
 Install the required dependencies using `pnpm install`
 
-Then, run the development server:
+Then, run the development server in secure mode (SSL):
 
 ```bash
-pnpm dev
+pnpm dev:secure
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -26,11 +26,11 @@ Create a `.env` file to set environment variables required to run locally:
 
 ```
 # Default
-BASE_URL=http://localhost:3000
+BASE_URL=https://localhost:3000
 NODE_ENV=development
 
 # Next Auth
-NEXTAUTH_URL=http://localhost:3000/api/auth
+NEXTAUTH_URL=https://localhost:3000/api/auth
 NEXTAUTH_SECRET={RANDOM_SECRET_STRING}
 
 # CIS2 Auth
