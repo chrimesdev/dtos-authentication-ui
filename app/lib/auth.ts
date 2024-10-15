@@ -2,6 +2,15 @@ import NextAuth, { Profile, Session } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import { OAuthConfig } from "next-auth/providers";
 
+declare module "next-auth" {
+  interface User {
+    firstName?: string;
+    lastName?: string;
+    sub?: string;
+    sid?: string;
+  }
+}
+
 const NHS_CIS2: OAuthConfig<Profile> = {
   id: "nhs-cis2",
   name: "NHS CIS2 Authentication",
@@ -37,14 +46,23 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     },
     async jwt({ token, profile }) {
       if (profile) {
-        token.name = `${profile.given_name} ${profile.family_name}`;
+        const { given_name, family_name, sub, sid } = profile;
+        token.firstName = given_name;
+        token.lastName = family_name;
+        token.sub = sub ?? undefined;
+        token.sid = sid ?? undefined;
       }
       return token;
     },
     async session({ session, token }: { session: Session; token: JWT }) {
       if (session.user) {
-        session.user.name = token.name;
+        const { firstName, lastName, sub, sid } = token;
+        session.user.firstName = firstName as string | undefined;
+        session.user.lastName = lastName as string | undefined;
+        session.user.sub = sub;
+        session.user.sid = sid as string | undefined;
       }
+      console.log(session);
       return session;
     },
   },
