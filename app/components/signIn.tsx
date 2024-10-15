@@ -8,7 +8,7 @@ interface SignInProps {
 }
 
 export default function SignIn({
-  serviceName = "Screening",
+  serviceName = process.env.SERVICE_NAME,
   headingLevel = 1,
 }: SignInProps) {
   const HeadingTag = `h${headingLevel}` as keyof JSX.IntrinsicElements;

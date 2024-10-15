@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  const serviceName = "Screening";
+  const serviceName = process.env.SERVICE_NAME;
   const session = await auth();
 
   return (

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 export default function AuthErrorPage() {
-  const serviceName = "Screening";
+  const serviceName = process.env.SERVICE_NAME;
 
   return (
     <>

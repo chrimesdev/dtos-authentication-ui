@@ -20,7 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-  const serviceName = "Screening";
+  const serviceName = process.env.SERVICE_NAME;
   const session = await auth();
 
   return (

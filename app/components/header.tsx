@@ -7,7 +7,7 @@ interface HeaderProps {
 }
 
 export default async function Header({
-  serviceName = "Screening",
+  serviceName = process.env.SERVICE_NAME,
 }: HeaderProps) {
   const session = await auth();
 

@@ -28,6 +28,7 @@ Create a `.env` file to set environment variables required to run locally:
 # Default
 BASE_URL=https://localhost:3000
 NODE_ENV=development
+SERVICE_NAME="Screening"
 
 # Next Auth
 NEXTAUTH_URL=https://localhost:3000/api/auth
